@@ -1,0 +1,8 @@
+en:
+  sessions:
+    new:
+      title: "Login in to Market Link"
+      submit: "Login"
+    create:
+      welcome: "Welcome back, %{name}!"
+      incorrect_details: "The email address or password you entered is incorrect. Please try again"

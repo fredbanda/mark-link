@@ -27,6 +27,8 @@
         </div>
 
         <%= form.submit t(".sign_up"), class: "button is-primary is-large is-align-self-flex-end mb-3 mt-3 is-fullwidth has-text-white", data: {disable_with: "Please wait..."} %>
+
+        <%= link_to "Already have an account? Login", login_path, class: "is-large has-text-centered mb-3 mt-3  has-text-black" %>
     <% end %>
   </div>
 </div>
