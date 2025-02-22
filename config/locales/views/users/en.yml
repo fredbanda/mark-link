@@ -1,0 +1,7 @@
+en:
+  users:
+    new:
+      title: "Sign up for Market Link"
+      sign_up: "Sign up"
+    create:
+      success: "Welcome to Market Link, %{name}!"
