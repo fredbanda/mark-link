@@ -4,4 +4,4 @@ en:
       title: "Sign up for Market Link"
       sign_up: "Sign up"
     create:
-      success: "Welcome to Market Link, %{name}!"
+      welcome: "Welcome to Market Link, %{name}!"

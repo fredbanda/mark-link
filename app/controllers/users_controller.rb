@@ -11,9 +11,8 @@ class UsersController < ApplicationController
 
       #TODO: LOGIN USER
 
-      redirect_to root_path,
-      status: :see_other,
-      flash: {success: t("Welcome", name: @user.name)}
+      flash[:success] = t("users.create.welcome", name: @user.name)
+      redirect_to root_path, status: :see_other
     else
       render :new, status: :unprocessable_entity
   end
