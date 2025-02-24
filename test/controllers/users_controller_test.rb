@@ -9,7 +9,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       post sign_up_path, params: { user: {
         name: "Test User",
         email: "testuser@example.com",
-        password: "testpassword123"
+        password: "testpassword123",
+        password_confirmation: "testpassword123"
       } }
     end
 
@@ -33,16 +34,34 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         password_confirmation: "testpassword"
       } }
       end
+      assert_response :unprocessable_entity
     end
 
     test "can create session with a correct email and password" do
-      @pp_session = User.create_app_session(
-        email: "fred@gmail.com",
-        password: "fred801234"
+      # Create the user before testing login
+      user = User.create!(
+        name: "Test User",
+        email: "testuser@example.com",
+        password: "testpassword123",
+        password_confirmation: "testpassword123"
       )
-      assert_not_nil @app_session
-      assert_not_nil @pp_session.token
+
+      puts "✅ User created: #{user.inspect}"  # Debugging line
+
+      # Attempt to create session
+      @app_session = User.create_app_session(
+        email: "testuser@example.com",
+        password: "testpassword123"
+      )
+
+      puts "🛠️ Debug: @app_session => #{@app_session.inspect}"  # Debugging line
+
+      # Assertions
+      assert_not_nil @app_session, "❌ Expected @app_session to be present, but it's nil!"
+      assert_not_nil @app_session.token, "❌ Expected @app_session.token to be present, but it's nil!"
     end
+
+
 
     test "can not create session with a correct email and incorrect password" do
       @app_session = User.create_app_session(email: "jerry@example.com", password: "wrong")

@@ -1,7 +1,7 @@
 <% content_for :title, t(".title") %>
 
-<div class="columns is-centered">
-  <div class="column box is-5 mt-6 p-5 m-4">
+<layout-columns class="columns is-centered">
+  <layout-column class="column box is-5 mt-6 p-5 m-4">
     <h1 class="title has-text-centered"><%= t(".title") %></h1>
     <%= form_with(
         model: @user, 
@@ -30,5 +30,5 @@
 
         <%= link_to "Already have an account? Login", login_path, class: "is-large has-text-centered mb-3 mt-3  has-text-black" %>
     <% end %>
-  </div>
-</div>
+  </layout-column>
+</layout-columns>
