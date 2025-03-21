@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+    skip_authentication only: [ :new, :create ]
     def new
     end
 
@@ -6,7 +7,7 @@ class SessionsController < ApplicationController
         @app_session = User.create_app_session(email: login_params[:email], password: login_params[:password])
 
         if @app_session
-            #TODO: store detals in a cookies
+            log_in(@app_session)
 
             flash[:success] = t(".success")
             redirect_to root_path, status: :see_other

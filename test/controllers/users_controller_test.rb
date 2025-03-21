@@ -16,6 +16,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     # Check flash message directly
     assert_equal I18n.t("users.create.welcome", name: "Test User"), flash[:success]
+    assert_redirected_to root_path
+    assert_not_empty cookies[:app_session]
 
     # Follow redirect and check if notification appears in view
     follow_redirect!

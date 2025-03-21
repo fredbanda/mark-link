@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_authentication only: [ :new, :create ]
   def new
     @user = User.new
   end
@@ -7,19 +8,21 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      @organization = Organization.create(members: [@user])
+      @organization = Organization.create(members: [ @user ])
 
-      #TODO: LOGIN USER
+      @pp_session = @user.app_sessions.create
+      log_in(@pp_session)
+
+      redirect_to root_path, status: :see_other
 
       flash[:success] = t("users.create.welcome", name: @user.name)
-      redirect_to root_path, status: :see_other
     else
       render :new, status: :unprocessable_entity
+    end
   end
-end
 
-private 
+private
 def user_params
   params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  end
+end
 end
